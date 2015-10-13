@@ -26,6 +26,11 @@ print(bufferingGenerator.next()) // -> 1
 print(copy.next())               // -> 1
 ```
 
+Just like `AnyGenerator` is used for `GeneratorType` type-erasure, Spork defines a class `AnyForkableGenerator` that's used for `ForkableGeneratorType` type-erasure.
+```swift
+let typeErasedGenerator = anyGenerator(bufferingGenerator)
+```
+
 Spork also defines a `ValueCopyGenerator` that works like `BufferingGenerator`, but has value-semantics.
 ```swift
 let valueCopyGenerator = ValueCopyGenerator(bufferingGenerator)
