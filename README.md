@@ -1,5 +1,5 @@
 # Spork
-Swift generator type that allows duplication of generators while maintaining independent state
+Spork defines Swift generators that can be copied while maintaining independent state.
 
 Normally, some generators work this way...
 ```swift
@@ -24,6 +24,11 @@ let bufferingGenerator = BufferingGenerator(bridgedFromGenerator: sharedStateGen
 let copy = bufferingGenerator.fork()
 print(bufferingGenerator.next()) // -> 1
 print(copy.next())               // -> 1
+```
+
+Just like `AnyGenerator` is used for `GeneratorType` type-erasure, Spork defines a class `AnyForkableGenerator` that's used for `ForkableGeneratorType` type-erasure.
+```swift
+let typeErasedGenerator = anyGenerator(bufferingGenerator)
 ```
 
 Spork also defines a `ValueCopyGenerator` that works like `BufferingGenerator`, but has value-semantics.
