@@ -1,5 +1,5 @@
 # Spork
-Swift generator type that allows duplication of generators while maintaining independent state
+Spork defines Swift generators that can be copied while maintaining independent state.
 
 Normally, some generators work this way...
 ```swift
