@@ -1,5 +1,5 @@
 # Spork
-Spork defines Swift generators that can be copied while maintaining independent state.
+Spork defines Swift generators that can be copied while maintaining independent state. It does this by wrapping a normal generator in a `BufferingGenerator`, and maintaining a shared buffer among copies to provide value-semantics.
 
 Normally, some generators work this way...
 ```swift
