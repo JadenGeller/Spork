@@ -22,7 +22,7 @@ class SporkTests: XCTestCase {
     }
     
     func testAnonymousAnyForkableGenerator() {
-        let generator = anyForkableGenerator(0, duplicate: { $0 }, next: { (inout x: Int) in x++ })
+        let generator = AnyForkableGenerator(0, duplicate: { $0 }, next: { (inout x: Int) in x++ })
         let forkedGenerator = generator.fork()
         XCTAssertEqual(0, forkedGenerator.next())
         XCTAssertEqual([1,2,3], Array(anyGenerator(forkedGenerator).prefix(3)))

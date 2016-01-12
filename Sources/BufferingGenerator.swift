@@ -1,29 +1,24 @@
+//
+//  BufferingGenerator.swift
+//  Spork
+//
+//  Created by Jaden Geller on 10/12/15.
+//
+//
+
 // Allows any generator (even one that normally has reference-like semantics) to be forked
-final class BufferingGenerator<Element>: ForkableGeneratorType {
-    private let state: SharedGeneratorBufferState<Element>
+public final class BufferingGenerator<Element> {
+    internal let state: SharedGeneratorBufferState<Element>
     
     // Note that it is illegal to call next on a generator after bridging it
-    init<G: GeneratorType where G.Element == Element>(bridgedFromGenerator generator: G) {
+    public init<G: GeneratorType where G.Element == Element>(bridgedFromGenerator generator: G) {
         state = SharedGeneratorBufferState(backing: generator)
         state.registerListener(self)
     }
     
-    private init(state: SharedGeneratorBufferState<Element>, offset: Int) {
+    internal init(state: SharedGeneratorBufferState<Element>, offset: Int) {
         self.state = state
         state.setFallbehind(offset, forListener: self)
-    }
-    
-    func next() -> Element? {
-        defer { state.decrementFallbehind(forListener: self) }
-        return peek()
-    }
-    
-    func peek() -> Element? {
-        return state.element(forListener: self)
-    }
-    
-    func fork() -> BufferingGenerator<Element> {
-        return BufferingGenerator(state: state, offset: state.getFallbehind(forListener: self)!)
     }
     
     deinit {
@@ -31,10 +26,39 @@ final class BufferingGenerator<Element>: ForkableGeneratorType {
     }
 }
 
+extension BufferingGenerator: GeneratorType {
+    public func next() -> Element? {
+        defer { state.decrementFallbehind(forListener: self) }
+        return peek()
+    }
+}
+
+extension BufferingGenerator: ForkableGeneratorType {
+    public func fork() -> BufferingGenerator<Element> {
+        return BufferingGenerator(state: state, offset: state.getFallbehind(forListener: self)!)
+    }
+    
+    public func peek() -> Element? {
+        return state.element(forListener: self)
+    }
+}
+
+extension BufferingGenerator: Comparable {}
+
+public func ==<Element>(lhs: BufferingGenerator<Element>, rhs: BufferingGenerator<Element>) -> Bool {
+    precondition(lhs.state === rhs.state, "Generators can only be compared if forked from a common generator.")
+    return lhs.state.getFallbehind(forListener: lhs) == rhs.state.getFallbehind(forListener: rhs)
+}
+
+public func <<Element>(lhs: BufferingGenerator<Element>, rhs: BufferingGenerator<Element>) -> Bool {
+    precondition(lhs.state === rhs.state, "Generators can only be compared if forked from a common generator.")
+    return lhs.state.getFallbehind(forListener: lhs) > rhs.state.getFallbehind(forListener: rhs)
+}
+
 // Shared state that keeps elements in its buffer only if they'll be needed
-private final class SharedGeneratorBufferState<Element> {
-    private var generator: AnyGenerator<Element>
-    private var buffer: [Element?] = [] // Rightmost values are the oldest
+final class SharedGeneratorBufferState<Element> {
+    var generator: AnyGenerator<Element>
+    var buffer: [Element?] = [] // Rightmost values are the oldest
     
     init<G: GeneratorType where G.Element == Element>(backing: G) {
         generator = anyGenerator(backing)
@@ -88,7 +112,7 @@ private final class SharedGeneratorBufferState<Element> {
         setFallbehind(getFallbehind(forListener: listener)! - 1, forListener: listener)
     }
     
-    private func trimBuffer() {
+    func trimBuffer() {
         // Remove fully consumed buffer elements
         if let maxNecessaryFallbehind = listenerFallbehinds.values.maxElement() {
             while maxFallbehind > maxNecessaryFallbehind {
@@ -96,16 +120,4 @@ private final class SharedGeneratorBufferState<Element> {
             }
         }
     }
-}
-
-extension BufferingGenerator: Comparable {}
-
-func ==<Element>(lhs: BufferingGenerator<Element>, rhs: BufferingGenerator<Element>) -> Bool {
-    precondition(lhs.state === rhs.state)
-    return lhs.state.getFallbehind(forListener: lhs) == rhs.state.getFallbehind(forListener: rhs)
-}
-
-func <<Element>(lhs: BufferingGenerator<Element>, rhs: BufferingGenerator<Element>) -> Bool {
-    precondition(lhs.state === rhs.state)
-    return lhs.state.getFallbehind(forListener: lhs) > rhs.state.getFallbehind(forListener: rhs)
 }

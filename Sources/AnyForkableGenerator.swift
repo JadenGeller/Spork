@@ -1,25 +1,39 @@
-final class AnyForkableGenerator<Element>: ForkableGeneratorType {
-    let _next: () -> Element?
-    let _fork: () -> AnyForkableGenerator
+//
+//  AnyForkableGenerator.swift
+//  Spork
+//
+//  Created by Jaden Geller on 10/12/15.
+//
+//
+
+public final class AnyForkableGenerator<Element> {
+    private let _next: () -> Element?
+    private let _fork: () -> AnyForkableGenerator
     
-    private init(next: () -> Element?, fork: () -> AnyForkableGenerator) {
+    internal init(next: () -> Element?, fork: () -> AnyForkableGenerator) {
         _next = next
         _fork = fork
     }
-    
-    func fork() -> AnyForkableGenerator<Element> {
+}
+
+extension AnyForkableGenerator: ForkableGeneratorType {
+    public func fork() -> AnyForkableGenerator<Element> {
         return _fork()
     }
     
-    func next() -> Element? {
+    public func next() -> Element? {
         return _next()
     }
 }
 
-func anyForkableGenerator<G: ForkableGeneratorType>(var base: G) -> AnyForkableGenerator<G.Element> {
-    return AnyForkableGenerator(next: { base.next() }, fork: { anyForkableGenerator(base.fork()) })
-}
-
-func anyForkableGenerator<State, Element>(var state: State, duplicate: State -> State, next: inout State -> Element?) -> AnyForkableGenerator<Element> {
-    return AnyForkableGenerator(next: { next(&state) }, fork: { anyForkableGenerator(duplicate(state), duplicate: duplicate, next: next) })
+extension AnyForkableGenerator {
+    public convenience init<G: ForkableGeneratorType where G.Element == Element>(_ base: G) {
+        var base = base
+        self.init(next: { base.next() }, fork: { AnyForkableGenerator(base.fork()) })
+    }
+    
+    public convenience init<State>(_ state: State, duplicate: State -> State, next: inout State -> Element?) {
+        var state = state
+        self.init(next: { next(&state) }, fork: { AnyForkableGenerator(duplicate(state), duplicate: duplicate, next: next) })
+    }
 }

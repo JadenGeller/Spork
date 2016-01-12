@@ -1,4 +1,12 @@
-protocol ForkableGeneratorType: GeneratorType {
+//
+//  ForkableGeneratorType.swift
+//  Spork
+//
+//  Created by Jaden Geller on 10/12/15.
+//
+//
+
+public protocol ForkableGeneratorType: GeneratorType {
     // Returns an identical generator that will generate the same elements
     // (and will not change state in response to a state change of the parent generator)
     func fork() -> Self
@@ -7,5 +15,12 @@ protocol ForkableGeneratorType: GeneratorType {
 // Generators that already have value-like semantics or whose elements can be easily computed
 // can conform to this protocol to provide a more efficient implementation of fork
 extension IndexingGenerator: ForkableGeneratorType {
-    func fork() -> IndexingGenerator { return self }
+    public func fork() -> IndexingGenerator { return self }
+}
+
+extension ForkableGeneratorType {
+    public func peek() -> Self.Element? {
+        var copy = fork()
+        return copy.next()
+    }
 }

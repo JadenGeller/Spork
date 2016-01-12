@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D0E2BD91BCCC20B00826435 /* Spork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0E2BCE1BCCC20B00826435 /* Spork.framework */; settings = {ASSET_TAGS = (); }; };
+		4D0E2BD91BCCC20B00826435 /* Spork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0E2BCE1BCCC20B00826435 /* Spork.framework */; };
 		4D0E2BDE1BCCC20B00826435 /* SporkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0E2BDD1BCCC20B00826435 /* SporkTests.swift */; };
-		4D0E2BEB1BCCC2C800826435 /* AnyForkableGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0E2BE61BCCC2C800826435 /* AnyForkableGenerator.swift */; settings = {ASSET_TAGS = (); }; };
-		4D0E2BEC1BCCC2C800826435 /* BufferingGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0E2BE71BCCC2C800826435 /* BufferingGenerator.swift */; settings = {ASSET_TAGS = (); }; };
-		4D0E2BED1BCCC2C800826435 /* ForkableGeneratorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0E2BE81BCCC2C800826435 /* ForkableGeneratorType.swift */; settings = {ASSET_TAGS = (); }; };
-		4D0E2BEF1BCCC2C800826435 /* ValueCopyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0E2BEA1BCCC2C800826435 /* ValueCopyGenerator.swift */; settings = {ASSET_TAGS = (); }; };
+		4D7213C31C44AD04007B806B /* AnyForkableGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7213BE1C44AD04007B806B /* AnyForkableGenerator.swift */; };
+		4D7213C41C44AD04007B806B /* BufferingGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7213BF1C44AD04007B806B /* BufferingGenerator.swift */; };
+		4D7213C51C44AD04007B806B /* ForkableGeneratorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7213C01C44AD04007B806B /* ForkableGeneratorType.swift */; };
+		4D7213C71C44AD04007B806B /* ValueCopyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7213C21C44AD04007B806B /* ValueCopyGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,10 +31,10 @@
 		4D0E2BD81BCCC20B00826435 /* SporkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SporkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D0E2BDD1BCCC20B00826435 /* SporkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SporkTests.swift; sourceTree = "<group>"; };
 		4D0E2BDF1BCCC20B00826435 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4D0E2BE61BCCC2C800826435 /* AnyForkableGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyForkableGenerator.swift; sourceTree = "<group>"; };
-		4D0E2BE71BCCC2C800826435 /* BufferingGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferingGenerator.swift; sourceTree = "<group>"; };
-		4D0E2BE81BCCC2C800826435 /* ForkableGeneratorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForkableGeneratorType.swift; sourceTree = "<group>"; };
-		4D0E2BEA1BCCC2C800826435 /* ValueCopyGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueCopyGenerator.swift; sourceTree = "<group>"; };
+		4D7213BE1C44AD04007B806B /* AnyForkableGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnyForkableGenerator.swift; path = ../../Sources/AnyForkableGenerator.swift; sourceTree = "<group>"; };
+		4D7213BF1C44AD04007B806B /* BufferingGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BufferingGenerator.swift; path = ../../Sources/BufferingGenerator.swift; sourceTree = "<group>"; };
+		4D7213C01C44AD04007B806B /* ForkableGeneratorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForkableGeneratorType.swift; path = ../../Sources/ForkableGeneratorType.swift; sourceTree = "<group>"; };
+		4D7213C21C44AD04007B806B /* ValueCopyGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValueCopyGenerator.swift; path = ../../Sources/ValueCopyGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,10 +77,10 @@
 		4D0E2BD01BCCC20B00826435 /* Spork */ = {
 			isa = PBXGroup;
 			children = (
-				4D0E2BE81BCCC2C800826435 /* ForkableGeneratorType.swift */,
-				4D0E2BE61BCCC2C800826435 /* AnyForkableGenerator.swift */,
-				4D0E2BE71BCCC2C800826435 /* BufferingGenerator.swift */,
-				4D0E2BEA1BCCC2C800826435 /* ValueCopyGenerator.swift */,
+				4D7213C01C44AD04007B806B /* ForkableGeneratorType.swift */,
+				4D7213BE1C44AD04007B806B /* AnyForkableGenerator.swift */,
+				4D7213BF1C44AD04007B806B /* BufferingGenerator.swift */,
+				4D7213C21C44AD04007B806B /* ValueCopyGenerator.swift */,
 				4D0E2BD31BCCC20B00826435 /* Info.plist */,
 			);
 			path = Spork;
@@ -201,10 +201,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D0E2BEC1BCCC2C800826435 /* BufferingGenerator.swift in Sources */,
-				4D0E2BEB1BCCC2C800826435 /* AnyForkableGenerator.swift in Sources */,
-				4D0E2BED1BCCC2C800826435 /* ForkableGeneratorType.swift in Sources */,
-				4D0E2BEF1BCCC2C800826435 /* ValueCopyGenerator.swift in Sources */,
+				4D7213C41C44AD04007B806B /* BufferingGenerator.swift in Sources */,
+				4D7213C31C44AD04007B806B /* AnyForkableGenerator.swift in Sources */,
+				4D7213C51C44AD04007B806B /* ForkableGeneratorType.swift in Sources */,
+				4D7213C71C44AD04007B806B /* ValueCopyGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +454,7 @@
 				4D0E2BE21BCCC20B00826435 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4D0E2BE31BCCC20B00826435 /* Build configuration list for PBXNativeTarget "SporkTests" */ = {
 			isa = XCConfigurationList;
@@ -462,6 +463,7 @@
 				4D0E2BE51BCCC20B00826435 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
