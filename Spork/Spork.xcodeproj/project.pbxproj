@@ -151,7 +151,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0720;
 				TargetAttributes = {
 					4D0E2BCD1BCCC20B00826435 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -230,6 +230,8 @@
 		4D0E2BC71BCCC12700826435 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
